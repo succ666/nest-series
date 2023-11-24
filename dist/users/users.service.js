@@ -45,27 +45,33 @@ let UsersService = class UsersService {
     }
     findAll(role) {
         if (role) {
-            return this.users.filter(user => user.role === role);
+            const rolesArray = this.users.filter(user => user.role === role);
+            if (rolesArray.length === 0) {
+                throw new common_1.NotFoundException('User Role Not Found');
+            }
+            return rolesArray;
         }
         return this.users;
     }
     findOne(id) {
         const user = this.users.find(user => user.id === id);
+        if (!user)
+            throw new common_1.NotFoundException('User Not Found');
         return user;
     }
-    create(user) {
+    create(createUserDto) {
         const usersByHighestId = [...this.users].sort((a, b) => b.id - a.id);
         const newUser = {
             id: usersByHighestId[0].id + 1,
-            ...user
+            ...createUserDto
         };
         this.users.push(newUser);
         return newUser;
     }
-    update(id, updateUser) {
+    update(id, updateUserDto) {
         this.users = this.users.map(user => {
             if (user.id === id) {
-                return { ...user, ...updateUser };
+                return { ...user, ...updateUserDto };
             }
             return user;
         });

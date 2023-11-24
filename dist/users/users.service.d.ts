@@ -1,3 +1,5 @@
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 export declare class UsersService {
     private users;
     findAll(role?: 'INTERN' | 'ENGINEER' | 'ADMIN'): {
@@ -12,21 +14,13 @@ export declare class UsersService {
         email: string;
         role: string;
     };
-    create(user: {
+    create(createUserDto: CreateUserDto): {
         name: string;
         email: string;
-        role: 'INTERN' | 'ENGINEER' | 'ADMIN';
-    }): {
-        name: string;
-        email: string;
-        role: 'INTERN' | 'ENGINEER' | 'ADMIN';
+        role: "INTERN" | "ENGINEER" | "ADMIN";
         id: number;
     };
-    update(id: number, updateUser: {
-        name?: string;
-        email?: string;
-        role?: 'INTERN' | 'ENGINEER' | 'ADMIN';
-    }): {
+    update(id: number, updateUserDto: UpdateUserDto): {
         id: number;
         name: string;
         email: string;
