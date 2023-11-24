@@ -26,7 +26,8 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
-takes.json
+/dist
+/.vscode
 package-lock.json
 tsconfig.build.json
 
